@@ -1,0 +1,20 @@
+file_count=0
+directory_count=0
+current_dir=$(pwd)
+
+count_files_and_directories() {
+  for entry in "$1"/*; do
+    if [ -f "$entry" ]; then
+      ((file_count++))
+    elif [ -d "$entry" ]; then
+      ((directory_count++))
+      count_files_and_directories "$entry"
+    fi
+  done
+}
+
+count_files_and_directories "$current_dir"
+
+echo "Количество файлов: $file_count"
+echo "Количество директорий: $directory_count"
+

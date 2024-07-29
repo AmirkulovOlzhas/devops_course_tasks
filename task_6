@@ -1,0 +1,17 @@
+directories=("~/projects/devops_test")
+
+backup_dir="~/projects/devops_test/backup"
+
+backup() {
+  local dir="$1"
+  local timestamp=$(date +%Y%m%d_%H%M%S)
+  tar -czvf "${backup_dir}/${dir}_${timestamp}.tar.gz" "$dir"
+}
+
+for dir in "${directories[@]}"; do
+  if ["$dir" != "backup"]; then  
+  	backup "$dir"
+  fi
+done
+
+# crontab -e и добавить  0 0 * * 0 ~/projects/devops_test/task_6

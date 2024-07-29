@@ -1,0 +1,4 @@
+mkdir task3dir;
+tar -cvzf mydirarchive.tgz ./MyDirectory/*.txt;
+tar -xvzf mydirarchive.tgz -C ./task3dir/;
+diff MyDirectory/ task3dir/MyDirectory/;

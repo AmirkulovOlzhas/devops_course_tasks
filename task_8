@@ -1,0 +1,27 @@
+function generate_password() {
+  local length="$1"
+  local charset="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()"
+  local password=""
+  for i in $(seq 1 $length); do
+    password+="${charset:RANDOM%${#charset}:1}"
+  done
+  echo "$password"
+}
+
+if [ $# -eq 0 ]; then
+  echo "Укажите длину пароля в качестве первого аргумента."
+  exit 1
+fi
+
+password_length="$1"
+
+if ! [[ "$password_length" =~ ^[0-9]+$ ]]; then
+  echo "Длина пароля должна быть числом."
+  exit 1
+fi
+
+output_file="passwords.txt"
+
+password=$(generate_password "$password_length")
+echo "$password" >> "$output_file"
+

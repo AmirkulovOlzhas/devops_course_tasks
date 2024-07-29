@@ -1,0 +1,15 @@
+if [ $# -eq 0 ]; then
+  echo "Укажите имя файла в качестве аргумента."
+  exit 1
+fi
+
+file="$1"
+
+if [ ! -f "$file" ]; then
+  echo "Файл '$file' не найден."
+  exit 1
+fi
+
+word_count=$(wc -w < "$file")
+echo "Количество слов в файле '$file': $word_count"
+

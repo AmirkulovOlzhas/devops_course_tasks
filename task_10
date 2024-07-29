@@ -1,0 +1,16 @@
+sudo apt update
+
+upgrade_available=$(sudo apt list --upgradable 2>&1 | grep -c "upgradable")
+
+if [ "$upgrade_available" -gt 0 ]; then
+  read -p "Доступны обновления. Установить их? (y/n): " confirm
+  if [[ "$confirm" == "y" || "$confirm" == "Y" ]]; then
+    sudo apt upgrade -y
+    echo "Обновления установлены успешно."
+  else
+    echo "Установка обновлений отменена."
+  fi
+else
+  echo "Обновлений не найдено."
+fi
+
